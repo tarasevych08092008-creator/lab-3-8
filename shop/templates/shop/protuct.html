@@ -1,0 +1,18 @@
+{% extends 'shop/base.html' %}
+
+{% block title %}{{ product.name }}{% endblock %}
+
+{% block content %}
+    <div style="background: rgba(255,255,255,0.7); padding: 20px; border-radius: 10px;">
+        <h1>{{ product.name }}</h1>
+        {% if product.image %}
+            <img src="{{ product.image.url }}" alt="{{ product.name }}" style="max-width: 400px; border-radius: 10px;">
+        {% endif %}
+        <p><strong>Категорія:</strong> <a href="{% url 'category_detail' product.category.id %}">{{ product.category.name }}</a></p>
+        <p><strong>Бренд:</strong> {{ product.brand.name }}</p>
+        
+        <br>
+        <button disabled style="padding: 10px 20px; background-color: #28a745; color: white; border: none; border-radius: 5px;">Купити (Тимчасово недоступно)</button>
+        <a href="{% url 'index' %}" style="margin-left: 15px;">Повернутися на головну</a>
+    </div>
+{% endblock %}

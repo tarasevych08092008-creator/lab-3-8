@@ -1,9 +1,9 @@
 {% extends 'shop/base.html' %}
 
-{% block title %}Головна сторінка{% endblock %}
+{% block title %}Категорія: {{ category.name }}{% endblock %}
 
 {% block content %}
-    <h1>Всі товари</h1>
+    <h1>Категорія: {{ category.name }}</h1>
     <div>
         {% for product in products %}
             <div class="product-card">
@@ -15,7 +15,7 @@
                 <button disabled>Купити</button>
             </div>
         {% empty %}
-            <p>Товарів поки немає.</p>
+            <p>В цій категорії ще немає товарів.</p>
         {% endfor %}
     </div>
 {% endblock %}

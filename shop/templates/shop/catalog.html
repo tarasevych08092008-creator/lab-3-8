@@ -1,10 +1,12 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="uk">
 <head>
     <meta charset="UTF-8">
-    <title>Title</title>
+    <title>{{ title }}</title>
 </head>
 <body>
-
+    <h1>{{ title }}</h1>
+    <p>{{ page_content }}</p>
+    <a href="{% url 'index' %}">Повернутися на головну</a>
 </body>
 </html>

@@ -1,85 +1,73 @@
+{% load static %}
 <!DOCTYPE html>
 <html lang="uk">
 <head>
     <meta charset="UTF-8">
-    <title>{% block title %}Магазин Одягу{% endblock %}</title>
-    <style>
-        body {
-            font-family: Arial, sans-serif;
-            background: linear-gradient(135deg, #74ebd5 0%, #9face6 100%); /* Фон для glassmorphism */
-            margin: 0;
-            display: flex;
-            flex-direction: column;
-            min-height: 100vh;
-        }
-        /* Glassmorphism Хедер */
-        header {
-            background: rgba(255, 255, 255, 0.2);
-            backdrop-filter: blur(10px);
-            -webkit-backdrop-filter: blur(10px);
-            border-bottom: 1px solid rgba(255, 255, 255, 0.3);
-            padding: 15px 30px;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-        }
-        header a {
-            text-decoration: none;
-            color: #333;
-            font-weight: bold;
-            margin-right: 15px;
-        }
-        main {
-            flex: 1;
-            padding: 20px;
-        }
-        /* Футер */
-        footer {
-            background-color: #222;
-            color: white;
-            text-align: center;
-            padding: 10px;
-            margin-top: auto;
-        }
-        .product-card {
-            background: rgba(255, 255, 255, 0.5);
-            padding: 15px;
-            border-radius: 10px;
-            margin-bottom: 15px;
-            display: inline-block;
-            width: 200px;
-            vertical-align: top;
-        }
-        .product-card img {
-            max-width: 100%;
-            border-radius: 5px;
-        }
-    </style>
+    <title>{% block title %}MineShop{% endblock %}</title>
+
+<link rel="stylesheet" href="{% static 'shop/style.css' %}">
+
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&display=swap" rel="stylesheet">
+
 </head>
 <body>
 
-    <header>
-        <div class="logo">
-            <a href="{% url 'index' %}" style="font-size: 24px;">🛍️ MineShop</a>
-        </div>
-        <nav>
-            <a href="{% url 'index' %}">Головна</a>
-            <!-- Тут ми виведемо категорії, передані через контекст -->
-            {% for cat in categories %}
-                <a href="{% url 'category_detail' cat.id %}">{{ cat.name }}</a>
-            {% endfor %}
-        </nav>
-    </header>
+<header>
 
-    <main>
-        {% block content %}
-        <!-- Унікальний контент сторінок буде тут -->
-        {% endblock %}
-    </main>
+    <div class="logo">
+        <a href="{% url 'index' %}">
+            MineShop
+        </a>
+    </div>
 
-    <footer>
-        <p>&copy; 2026 Всі права захищено. Дизайн та розробка.</p>
-    </footer>
+    <nav>
+
+        <a href="{% url 'index' %}">
+            Головна
+        </a>
+
+        {% for cat in categories %}
+            <a href="{% url 'category_detail' cat.id %}">
+                {{ cat.name }}
+            </a>
+        {% endfor %}
+
+        <a href="{% url 'cart_detail' %}" class="cart-btn">
+            🛒 Кошик
+        </a>
+
+    </nav>
+
+</header>
+
+<main>
+    {% block content %}
+    {% endblock %}
+</main>
+
+<footer>
+
+    <p>Підпишіться на новини та нові колекції</p>
+
+    <form action="{% url 'subscribe' %}" method="POST">
+
+        {% csrf_token %}
+
+        <input
+            type="email"
+            name="email"
+            placeholder="Ваш Email..."
+            required
+        >
+
+        <button type="submit">
+            Підписатися
+        </button>
+
+    </form>
+
+</footer>
 
 </body>
 </html>

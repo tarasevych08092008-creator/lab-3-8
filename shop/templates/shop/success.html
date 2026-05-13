@@ -1,0 +1,12 @@
+{% extends 'shop/base.html' %}
+
+{% block title %}Замовлення прийнято{% endblock %}
+
+{% block content %}
+    <div class="glass-panel" style="max-width: 600px; margin: 0 auto; text-align: center;">
+        <h2>🎉 Дякуємо за замовлення!</h2>
+        <p>Ваші дані успішно відправлені продавцю. Ми зв'яжемося з вами найближчим часом.</p>
+        <br>
+        <a href="{% url 'index' %}" class="btn-success">Повернутися на головну</a>
+    </div>
+{% endblock %}

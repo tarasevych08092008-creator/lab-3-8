@@ -1,0 +1,81 @@
+{% extends 'shop/base.html' %}
+
+{% block title %}{{ product.name }}{% endblock %}
+
+{% block content %}
+    <div class="glass-panel" style="max-width: 800px; margin: 0 auto; color: white; background: rgba(255, 255, 255, 0.1); padding: 30px; border-radius: 20px; border: 1px solid rgba(255,255,255,0.2); backdrop-filter: blur(15px);">
+
+        <!-- Інформація про товар -->
+        <div style="display: flex; gap: 30px; flex-wrap: wrap; margin-bottom: 30px;">
+            {% if product.image %}
+                <div style="flex: 1; min-width: 300px;">
+                    <img src="{{ product.image.url }}" alt="{{ product.name }}" style="max-width: 100%; border-radius: 15px; box-shadow: 0 4px 15px rgba(0,0,0,0.2);">
+                </div>
+            {% endif %}
+
+            <div style="flex: 1; min-width: 300px;">
+                <h1 style="margin-top: 0;">{{ product.name }}</h1>
+                <p style="font-size: 18px; color: #ccc;">Бренд: {{ product.brand.name }} | Категорія: {{ product.category.name }}</p>
+                <p style="font-size: 24px; font-weight: bold; color: #74ebd5;">{{ product.price }} грн.</p>
+
+                <!-- Середній бал -->
+                <div style="background: rgba(255,255,255,0.1); padding: 10px 20px; border-radius: 12px; display: inline-block; margin: 15px 0;">
+                    <span style="font-size: 18px;">Середній бал:</span>
+                    <span style="font-size: 22px; font-weight: bold; color: #FFD700;">⭐ {{ product.get_average_rating }}</span>
+                </div>
+                <br>
+                <a href="{% url 'add_to_cart' product.id %}" style="display: inline-block; margin-top: 15px; padding: 15px 35px; background: #28a745; color: white; text-decoration: none; border-radius: 12px; font-weight: bold; font-size: 18px; box-shadow: 0 4px 15px rgba(40, 167, 69, 0.3);">Додати в кошик</a>
+            </div>
+        </div>
+
+        <hr style="border: 0; height: 1px; background: rgba(255,255,255,0.2); margin: 30px 0;">
+
+        <!-- Форма для відгуку -->
+        <h3>Залишити відгук</h3>
+        <form method="POST" style="background: rgba(255,255,255,0.05); padding: 25px; border-radius: 15px; border: 1px solid rgba(255,255,255,0.1); display: flex; flex-direction: column; gap: 15px;">
+            {% csrf_token %}
+            <div>
+                <label style="display: block; margin-bottom: 8px; font-weight: bold;">Ваша оцінка:</label>
+                <select name="score" style="padding: 12px; border-radius: 12px; border: none; background: rgba(255,255,255,0.9); font-size: 16px; outline: none; width: 100%; max-width: 200px;">
+                    <option value="5">⭐⭐⭐⭐⭐ (5) Відмінно</option>
+                    <option value="4">⭐⭐⭐⭐ (4) Добре</option>
+                    <option value="3">⭐⭐⭐ (3) Нормально</option>
+                    <option value="2">⭐⭐ (2) Погано</option>
+                    <option value="1">⭐ (1) Жахливо</option>
+                </select>
+            </div>
+
+            <div>
+                <label style="display: block; margin-bottom: 8px; font-weight: bold;">Коментар:</label>
+                <textarea name="comment" rows="4" placeholder="Напишіть ваші враження про товар..." style="width: 100%; box-sizing: border-box; padding: 15px; border-radius: 12px; border: none; background: rgba(255,255,255,0.9); font-size: 16px; outline: none; resize: vertical;"></textarea>
+            </div>
+
+            <button type="submit" style="align-self: flex-start; padding: 12px 25px; background: #007bff; color: white; border: none; border-radius: 12px; font-weight: bold; font-size: 16px; cursor: pointer;">Відправити відгук</button>
+        </form>
+
+        <hr style="border: 0; height: 1px; background: rgba(255,255,255,0.2); margin: 30px 0;">
+
+        <!-- Список відгуків -->
+        <h3>Відгуки покупців ({{ ratings|length }})</h3>
+        <div style="display: flex; flex-direction: column; gap: 15px;">
+            {% for rating in ratings %}
+                <div style="background: rgba(255,255,255,0.1); padding: 20px; border-radius: 15px; border: 1px solid rgba(255,255,255,0.05);">
+                    <div style="display: flex; justify-content: space-between; margin-bottom: 10px;">
+                        <span style="font-size: 18px; color: #FFD700;">
+                            {% if rating.score == 5 %}⭐⭐⭐⭐⭐{% elif rating.score == 4 %}⭐⭐⭐⭐{% elif rating.score == 3 %}⭐⭐⭐{% elif rating.score == 2 %}⭐⭐{% else %}⭐{% endif %}
+                        </span>
+                        <span style="color: #aaa; font-size: 14px;">{{ rating.created_at|date:"d.m.Y H:i" }}</span>
+                    </div>
+                    {% if rating.comment %}
+                        <p style="margin: 0; line-height: 1.5;">{{ rating.comment }}</p>
+                    {% else %}
+                        <p style="margin: 0; color: #aaa; font-style: italic;">Користувач залишив тільки оцінку.</p>
+                    {% endif %}
+                </div>
+            {% empty %}
+                <p style="color: #ccc;">Ще немає відгуків. Будьте першим!</p>
+            {% endfor %}
+        </div>
+
+    </div>
+{% endblock %}

@@ -3,19 +3,31 @@
 {% block title %}Головна сторінка{% endblock %}
 
 {% block content %}
-    <h1>Всі товари</h1>
-    <div>
+    <h1 style="color: white; margin-bottom: 30px;">Всі товари</h1>
+    <div style="display: flex; gap: 25px; flex-wrap: wrap;">
         {% for product in products %}
-            <div class="product-card">
-                {% if product.image %}
-                    <img src="{{ product.image.url }}" alt="{{ product.name }}">
-                {% endif %}
-                <h3><a href="{% url 'product_detail' product.id %}">{{ product.name }}</a></h3>
-                <p>Бренд: {{ product.brand.name }}</p>
-                <button disabled>Купити</button>
+            <!-- Картка товару -->
+            <div class="product-card" style="background: rgba(255, 255, 255, 0.1); border-radius: 15px; padding: 20px; width: 250px; border: 1px solid rgba(255,255,255,0.2); backdrop-filter: blur(10px);">
+
+               {% if product.image %}
+    <a href="{% url 'product_detail' product.id %}">
+        <img src="{{ product.image.url }}" alt="{{ product.name }}" style="border-radius: 10px; width: 100%; height: auto; object-fit: cover; transition: 0.3s;" onmouseover="this.style.opacity=0.8" onmouseout="this.style.opacity=1">
+    </a>
+{% endif %}
+
+                <h3 style="margin: 15px 0 10px 0;">
+                    <a href="{% url 'product_detail' product.id %}" style="color: #74ebd5; text-decoration: none;">{{ product.name }}</a>
+                </h3>
+
+                <p style="color: #ccc; margin: 5px 0;">Бренд: {{ product.brand.name }}</p>
+
+                <!-- ОСЬ ТУТ ТЕПЕР ВІДОБРАЖАЄТЬСЯ ЦІНА -->
+                <p style="color: white; font-weight: bold; font-size: 20px; margin: 15px 0;">{{ product.price }} грн.</p>
+
+                <a href="{% url 'add_to_cart' product.id %}" style="display: block; text-align: center; padding: 12px 20px; background: #28a745; color: white; text-decoration: none; border-radius: 10px; font-weight: bold; margin-top: 10px; transition: 0.3s;">Купити</a>
             </div>
         {% empty %}
-            <p>Товарів поки немає.</p>
+            <p style="color: white; font-size: 18px;">Товарів поки немає.</p>
         {% endfor %}
     </div>
 {% endblock %}

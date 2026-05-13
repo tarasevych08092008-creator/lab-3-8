@@ -11,8 +11,9 @@
                     <img src="{{ product.image.url }}" alt="{{ product.name }}">
                 {% endif %}
                 <h3><a href="{% url 'product_detail' product.id %}">{{ product.name }}</a></h3>
+            <p style="color: white; font-weight: bold; font-size: 20px; margin: 15px 0;">{{ product.price }} грн.</p>
                 <p>Бренд: {{ product.brand.name }}</p>
-                <button disabled>Купити</button>
+                <a href="{% url 'add_to_cart' product.id %}" style="display:inline-block; padding: 8px 15px; background: #28a745; color: white; text-decoration: none; border-radius: 5px;">Купити</a>
             </div>
         {% empty %}
             <p>В цій категорії ще немає товарів.</p>

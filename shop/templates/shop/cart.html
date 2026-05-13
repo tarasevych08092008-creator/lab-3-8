@@ -1,0 +1,55 @@
+{% extends 'shop/base.html' %}
+
+{% block title %}Кошик та Оформлення{% endblock %}
+
+{% block content %}
+    <div class="glass-panel" style="max-width: 800px; margin: 0 auto; color: white; background: rgba(255, 255, 255, 0.1); padding: 30px; border-radius: 20px; border: 1px solid rgba(255,255,255,0.2); backdrop-filter: blur(15px);">
+        <h2 style="margin-top: 0;">Ваш кошик 🛒</h2>
+
+        {% if cart_items %}
+            <ul style="list-style: none; padding: 0;">
+                {% for item in cart_items %}
+                    <li style="background: rgba(255,255,255,0.1); padding: 15px 20px; margin-bottom: 15px; border-radius: 15px; display: flex; justify-content: space-between; align-items: center; border: 1px solid rgba(255,255,255,0.1);">
+                        <span style="font-weight: bold; font-size: 18px;">{{ item.product.name }}</span>
+                        <span style="display: flex; align-items: center; gap: 15px;">
+                            <span>Ціна: {{ item.cost }} грн.</span>
+                            <span>Кількість: <strong style="background: #74ebd5; color: #222; padding: 4px 10px; border-radius: 12px;">{{ item.quantity }}</strong></span>
+                            <a href="{% url 'remove_from_cart' item.product.id %}" style="padding: 8px 15px; background-color: rgba(220, 53, 69, 0.8); color: white; border-radius: 10px; text-decoration: none; font-weight: bold;">Видалити</a>
+                        </span>
+                    </li>
+                {% endfor %}
+            </ul>
+            <h3 style="text-align: right; margin-top: 20px; font-size: 22px;">Загальна сума: <span style="color: #74ebd5;">{{ total_price }} грн.</span></h3>
+
+            <hr style="border: 0; height: 1px; background: rgba(255,255,255,0.2); margin: 30px 0;">
+
+            <h3>Оформлення замовлення</h3>
+            <!-- Оновлена форма з круглими полями -->
+            <form action="{% url 'checkout' %}" method="POST" style="background: rgba(255,255,255,0.05); padding: 25px; border-radius: 15px; display: flex; flex-direction: column; gap: 20px; border: 1px solid rgba(255,255,255,0.1);">
+                {% csrf_token %}
+
+                <div>
+                    <label style="display: block; margin-bottom: 8px; font-weight: bold; color: #ccc;">ПІБ:</label>
+                    <input type="text" name="full_name" required placeholder="Іванов Іван Іванович" style="width: 100%; box-sizing: border-box; padding: 15px; border-radius: 12px; border: none; background: rgba(255,255,255,0.9); font-size: 16px; outline: none;">
+                </div>
+
+                <div>
+                    <label style="display: block; margin-bottom: 8px; font-weight: bold; color: #ccc;">Номер телефону:</label>
+                    <input type="text" name="phone" required placeholder="+380..." style="width: 100%; box-sizing: border-box; padding: 15px; border-radius: 12px; border: none; background: rgba(255,255,255,0.9); font-size: 16px; outline: none;">
+                </div>
+
+                <div>
+                    <label style="display: block; margin-bottom: 8px; font-weight: bold; color: #ccc;">Адреса доставки:</label>
+                    <input type="text" name="address" required placeholder="Місто, відділення НП..." style="width: 100%; box-sizing: border-box; padding: 15px; border-radius: 12px; border: none; background: rgba(255,255,255,0.9); font-size: 16px; outline: none;">
+                </div>
+
+                <!-- Кругла і велика кнопка підтвердження -->
+                <button type="submit" style="align-self: flex-start; margin-top: 10px; padding: 15px 35px; background: #28a745; color: white; border: none; border-radius: 12px; font-weight: bold; font-size: 16px; cursor: pointer; box-shadow: 0 4px 15px rgba(40, 167, 69, 0.3);">Підтвердити замовлення</button>
+            </form>
+
+        {% else %}
+            <p style="font-size: 18px;">Ваш кошик наразі порожній.</p>
+            <a href="{% url 'index' %}" style="display: inline-block; margin-top: 15px; padding: 12px 25px; background: #74ebd5; color: #222; text-decoration: none; font-weight: bold; border-radius: 12px;">Повернутися до покупок</a>
+        {% endif %}
+    </div>
+{% endblock %}

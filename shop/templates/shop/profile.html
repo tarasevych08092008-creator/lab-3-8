@@ -1,0 +1,28 @@
+{% extends 'shop/base.html' %}
+{% block title %}Особистий кабінет{% endblock %}
+{% block content %}
+    <div class="glass-panel" style="max-width: 800px; margin: 0 auto; color: white;">
+        <h2>Привіт, {{ user.username }}! 👋</h2>
+        <p>Ваш Email: {{ user.email }}</p>
+        <p><a href="{% url 'password_reset' %}" style="color: #FFD700;">🔑 Змінити пароль</a></p>
+        
+        <hr style="border-color: rgba(255,255,255,0.2); margin: 20px 0;">
+        
+        <h3>{% if is_admin %}Всі замовлення (Режим Адміністратора){% else %}Мої замовлення{% endif %}</h3>
+        
+        {% for order in orders %}
+            <div style="background: rgba(255,255,255,0.1); padding: 15px; border-radius: 10px; margin-bottom: 15px;">
+                <h4>Замовлення #{{ order.id }} від {{ order.created_at|date:"d.m.Y H:i" }}</h4>
+                <p><strong>Одержувач:</strong> {{ order.full_name }} ({{ order.phone }})</p>
+                <p><strong>Адреса:</strong> {{ order.address }}</p>
+                <ul>
+                    {% for item in order.items.all %}
+                        <li>{{ item.product.name }} — {{ item.quantity }} шт.</li>
+                    {% endfor %}
+                </ul>
+            </div>
+        {% empty %}
+            <p>Замовлень поки немає.</p>
+        {% endfor %}
+    </div>
+{% endblock %}

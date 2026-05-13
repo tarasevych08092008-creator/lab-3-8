@@ -1,0 +1,25 @@
+{% extends 'shop/base.html' %}
+{% block title %}Реєстрація{% endblock %}
+
+{% block content %}
+    <!-- Мальовничий фон на весь екран (тільки для цієї сторінки) -->
+    <div style="background: url('https://images.unsplash.com/photo-1476514525535-07fb3b4ae5f1?q=80&w=2000') no-repeat center center/cover; position: fixed; top: 0; left: 0; width: 100vw; height: 100vh; z-index: -1;"></div>
+
+    <div class="auth-container">
+        <div class="glass-auth-card">
+            <h2>Register</h2>
+
+            <form method="POST">
+                {% csrf_token %}
+                {{ form.as_p }}
+                <button type="submit" class="btn-blue">CREATE ACCOUNT</button>
+            </form>
+
+            <div class="auth-footer">
+                Already have an account? <a href="{% url 'login' %}">Sign in</a>
+            </div>
+        </div>
+    </div>
+
+    <!-- Стилі спеціально для карток авторизації як на фото -->
+{% endblock %}

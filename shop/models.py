@@ -1,4 +1,5 @@
 from django.db import models
+from django.contrib.auth.models import User
 
 
 class Category(models.Model):
@@ -38,7 +39,6 @@ class Product(models.Model):
         return self.name
 
 
-# ОНОВЛЕНО: Додано поле comment
 class Rating(models.Model):
     product = models.ForeignKey(Product, on_delete=models.CASCADE, related_name='ratings')
     score = models.IntegerField(verbose_name="Оцінка")
@@ -58,6 +58,8 @@ class Subscriber(models.Model):
 
 
 class Order(models.Model):
+    # НОВЕ ПОЛЕ: Зв'язок замовлення з користувачем
+    user = models.ForeignKey(User, on_delete=models.SET_NULL, null=True, blank=True, verbose_name="Користувач")
     full_name = models.CharField(max_length=200, verbose_name="ПІБ покупця")
     phone = models.CharField(max_length=20, verbose_name="Телефон")
     address = models.TextField(verbose_name="Адреса доставки")

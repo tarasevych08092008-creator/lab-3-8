@@ -269,3 +269,191 @@
             }
 
         }
+
+        .auth-container {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 75vh;
+        }
+        .glass-auth-card {
+            background: rgba(255, 255, 255, 0.15);
+            backdrop-filter: blur(25px);
+            -webkit-backdrop-filter: blur(25px);
+            border: 1px solid rgba(255, 255, 255, 0.3);
+            border-radius: 20px;
+            padding: 40px;
+            width: 100%;
+            max-width: 380px;
+            box-shadow: 0 15px 35px rgba(0,0,0,0.2);
+            text-align: center;
+            color: white;
+        }
+        .glass-auth-card h2 {
+            margin-top: 0;
+            margin-bottom: 30px;
+            font-size: 28px;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            font-weight: 600;
+        }
+        /* Стилізація полів Django форми */
+        .glass-auth-card form p {
+            text-align: left;
+            margin-bottom: 20px;
+        }
+        .glass-auth-card form label {
+            display: block;
+            font-size: 13px;
+            color: #00a8ff;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-bottom: 5px;
+            font-weight: bold;
+        }
+        .glass-auth-card input {
+            width: 100%;
+            padding: 10px 0;
+            background: transparent;
+            border: none;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.6);
+            color: white;
+            font-size: 16px;
+            outline: none;
+            transition: 0.3s;
+            box-sizing: border-box;
+        }
+        .glass-auth-card input:focus {
+            border-bottom: 1px solid #00a8ff;
+        }
+        /* Ховаємо підказки пароля, щоб не ламали дизайн */
+        .glass-auth-card .helptext, .glass-auth-card ul {
+            font-size: 11px;
+            color: rgba(255,255,255,0.7);
+            list-style: none;
+            padding: 0;
+            margin-top: 5px;
+        }
+        .btn-blue {
+            background: #00a8ff;
+            color: white;
+            border: none;
+            padding: 15px;
+            width: 100%;
+            border-radius: 8px;
+            font-size: 16px;
+            font-weight: bold;
+            cursor: pointer;
+            margin-top: 15px;
+            transition: 0.3s;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+        .btn-blue:hover {
+            background: #008ecc;
+            box-shadow: 0 5px 15px rgba(0, 168, 255, 0.4);
+        }
+        .auth-footer {
+            margin-top: 25px;
+            font-size: 14px;
+        }
+        .auth-footer a {
+            color: #00a8ff;
+            text-decoration: none;
+            font-weight: bold;
+        }
+
+
+        .auth-container {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 75vh;
+        }
+        .glass-auth-card {
+            background: rgba(255, 255, 255, 0.15);
+            backdrop-filter: blur(25px);
+            -webkit-backdrop-filter: blur(25px);
+            border: 1px solid rgba(255, 255, 255, 0.3);
+            border-radius: 20px;
+            padding: 40px;
+            width: 100%;
+            max-width: 380px;
+            box-shadow: 0 15px 35px rgba(0,0,0,0.2);
+            text-align: center;
+            color: white;
+        }
+        .glass-auth-card h2 {
+            margin-top: 0;
+            margin-bottom: 30px;
+            font-size: 28px;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            font-weight: 600;
+        }
+        .glass-auth-card form p {
+            text-align: left;
+            margin-bottom: 25px;
+        }
+        .glass-auth-card form label {
+            display: block;
+            font-size: 13px;
+            color: #00a8ff;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-bottom: 5px;
+            font-weight: bold;
+        }
+        .glass-auth-card input {
+            width: 100%;
+            padding: 10px 0;
+            background: transparent;
+            border: none;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.6);
+            color: white;
+            font-size: 16px;
+            outline: none;
+            transition: 0.3s;
+            box-sizing: border-box;
+        }
+        .glass-auth-card input:focus {
+            border-bottom: 1px solid #00a8ff;
+        }
+        .btn-blue {
+            background: #00a8ff;
+            color: white;
+            border: none;
+            padding: 15px;
+            width: 100%;
+            border-radius: 8px;
+            font-size: 16px;
+            font-weight: bold;
+            cursor: pointer;
+            margin-top: 10px;
+            transition: 0.3s;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+        .btn-blue:hover {
+            background: #008ecc;
+            box-shadow: 0 5px 15px rgba(0, 168, 255, 0.4);
+        }
+        .auth-footer {
+            margin-top: 25px;
+            font-size: 14px;
+        }
+        .auth-footer a {
+            color: #00a8ff;
+            text-decoration: none;
+            font-weight: bold;
+        }
+        
+form p input {
+    width: 100%;
+    padding: 12px;
+    border-radius: 10px; /* Заокруглення */
+    border: 1px solid rgba(255,255,255,0.3);
+    background: rgba(255,255,255,0.9);
+    margin-top: 5px;
+    box-sizing: border-box;
+}

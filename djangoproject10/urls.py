@@ -5,9 +5,10 @@ from django.conf.urls.static import static
 
 urlpatterns = [
     path('admin/', admin.site.urls),
+    # Підключаємо вбудовані URL для логіну, логауту і відновлення пароля
+    path('accounts/', include('django.contrib.auth.urls')),
     path('', include('shop.urls')),
 ]
 
-# Це дозволяє Django показувати фотографії під час розробки
 if settings.DEBUG:
     urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

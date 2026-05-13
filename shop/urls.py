@@ -10,4 +10,8 @@ urlpatterns = [
     path('add-to-cart/<int:product_id>/', views.add_to_cart, name='add_to_cart'),
     path('remove-from-cart/<int:product_id>/', views.remove_from_cart, name='remove_from_cart'),
     path('checkout/', views.checkout, name='checkout'),
+
+    # Нові URL для Лаби 8
+    path('register/', views.register, name='register'),
+    path('profile/', views.profile, name='profile'),
 ]
